@@ -1,9 +1,9 @@
 # Prakalpa 2025
 
-![Project Banner](https://prakalpa2025.vercel.app/)
+🔗 [Visit Prakalpa ‘25](https://prakalpa2025.vercel.app/)
 
 ## 📌 About the Project
-Prakalpa 2025 is a cutting-edge initiative aimed at revolutionizing [Technical Event].
+Prakalpa ‘25 is an innovative platform designed to **redefine technical project exhibitions**. It provides a seamless way for participants to showcase their projects, receive feedback, and network with industry professionals. The platform integrates AI-powered analytics to evaluate projects based on innovation, feasibility, and impact, ensuring a **transparent and data-driven assessment** system.
 
 ## 📂 Folder Structure
 ```
