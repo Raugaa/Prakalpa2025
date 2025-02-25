@@ -1,9 +1,9 @@
 # Prakalpa 2025
 
-![Project Banner](https://your-vercel-host-link.com)
+![Project Banner](https://prakalpa2025.vercel.app/)
 
 ## 📌 About the Project
-Prakalpa 2025 is a cutting-edge initiative aimed at revolutionizing [brief description of the project's purpose]. This project leverages modern technologies to [key functionalities and objectives].
+Prakalpa 2025 is a cutting-edge initiative aimed at revolutionizing [Technical Event].
 
 ## 📂 Folder Structure
 ```
