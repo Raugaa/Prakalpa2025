@@ -1,0 +1,486 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #000;
+  overflow-x: hidden;
+}
+
+.space-background {
+  background: linear-gradient(45deg, #000000, #050b18);
+  position: relative;
+  overflow: hidden;
+}
+
+.space-background::before,
+.space-background::after {
+  content: '';
+  position: absolute;
+  width: 300%;
+  height: 300%;
+  top: -100%;
+  left: -100%;
+  z-index: 0;
+  transform-origin: center;
+  animation: space-stars 180s linear infinite;
+}
+
+.space-background::before {
+  background-image: 
+    radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px),
+    radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 5px);
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+}
+
+.space-background::after {
+  background-image: 
+    radial-gradient(#00ffff, rgba(0,255,255,.2) 2px, transparent 4px),
+    radial-gradient(#ff00ff, rgba(255,0,255,.15) 1px, transparent 3px),
+    radial-gradient(#00ffff, rgba(0,255,255,.1) 2px, transparent 4px);
+  background-size: 400px 400px, 300px 300px, 200px 200px;
+  background-position: 30px 20px, 150px 150px, 80px 80px;
+  animation-direction: reverse;
+  animation-duration: 120s;
+}
+
+@keyframes space-stars {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(360deg) scale(1.5);
+  }
+}
+
+.parallax-layer {
+  will-change: transform;
+  position: absolute;
+  pointer-events: none;
+}
+
+.parallax-layer-1 {
+  background: radial-gradient(circle, transparent 60%, #000 100%);
+  width: 200%;
+  height: 200%;
+  left: -50%;
+  top: -50%;
+  animation: parallax-rotate 60s linear infinite;
+}
+
+.parallax-layer-2 {
+  background: radial-gradient(circle at center, rgba(0,255,255,0.1) 0%, transparent 50%);
+  width: 150%;
+  height: 150%;
+  left: -25%;
+  top: -25%;
+  animation: parallax-rotate 40s linear infinite reverse;
+}
+
+@keyframes parallax-rotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.theme-card {
+  position: relative;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  z-index: 1;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.theme-card::before,
+.theme-card::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(
+    120deg,
+    #00ffff,
+    #ff00ff,
+    #00ffff,
+    #ff00ff,
+    #00ffff
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: rotate-gradient 4s linear infinite;
+  background-size: 400% 400%;
+  z-index: -1;
+}
+
+.theme-card::after {
+  animation: rotate-gradient 4s linear infinite reverse;
+  opacity: 0.7;
+  filter: blur(10px);
+}
+
+@keyframes rotate-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.theme-card:hover {
+  transform: translateY(-10px) scale(1.02) rotateX(10deg) rotateY(10deg);
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.3),
+    0 0 40px rgba(255, 0, 255, 0.2);
+}
+
+.theme-card:hover::before,
+.theme-card:hover::after {
+  animation-duration: 2s;
+  background-size: 200% 200%;
+  filter: blur(15px);
+}
+
+.theme-card:active {
+  transform: translateY(-5px) scale(0.98) rotateX(-5deg) rotateY(-5deg);
+}
+
+.rotating-icon {
+  display: inline-block;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-card:hover .rotating-icon {
+  transform: rotate(360deg) scale(1.4);
+  text-shadow: 0 0 20px currentColor;
+}
+
+.globe {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at 30% 30%, 
+      rgba(255, 255, 255, 0.8),
+      rgba(0, 255, 255, 0.4) 30%,
+      rgba(0, 0, 0, 0.8) 70%
+    );
+  box-shadow: 
+    0 0 80px rgba(0, 255, 255, 0.3),
+    inset 0 0 120px rgba(255, 255, 255, 0.2);
+  animation: globe-rotate 20s linear infinite;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 2rem auto;
+}
+
+.globe:hover {
+  transform: scale(1.1) rotateX(30deg);
+  box-shadow: 
+    0 0 100px rgba(0, 255, 255, 0.5),
+    inset 0 0 150px rgba(255, 255, 255, 0.3);
+}
+
+.globe::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: 
+    linear-gradient(90deg, transparent 50%, rgba(0, 255, 255, 0.1) 51%, transparent 52%) 0 0 / 20px 20px repeat,
+    linear-gradient(0deg, transparent 50%, rgba(0, 255, 255, 0.1) 51%, transparent 52%) 0 0 / 20px 20px repeat;
+  animation: globe-grid 10s linear infinite;
+  opacity: 0.4;
+}
+
+.globe::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 70% 70%, 
+    transparent 0%,
+    rgba(0, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  animation: globe-highlight 4s ease-in-out infinite alternate;
+}
+
+@keyframes globe-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes globe-grid {
+  0% { transform: rotateX(20deg) rotateY(0deg); }
+  100% { transform: rotateX(20deg) rotateY(360deg); }
+}
+
+@keyframes globe-highlight {
+  0% { opacity: 0.3; transform: scale(1); }
+  100% { opacity: 0.7; transform: scale(1.1); }
+}
+
+.cyber-button {
+  position: relative;
+  background: transparent;
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  padding: 15px 30px;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.cyber-button:hover {
+  background: #00ffff;
+  color: #000;
+  box-shadow: 
+    0 0 20px #00ffff,
+    0 0 40px rgba(0, 255, 255, 0.5),
+    0 0 60px rgba(0, 255, 255, 0.3);
+  transform: translateY(-5px) rotateX(10deg);
+  letter-spacing: 4px;
+}
+
+.cyber-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.cyber-button:hover::before {
+  left: 100%;
+}
+
+.cyber-button:active {
+  transform: translateY(2px) rotateX(-5deg);
+  box-shadow: 
+    0 0 10px #00ffff,
+    0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    transparent, 
+    #00ffff,
+    #ff00ff,
+    #00ffff,
+    transparent
+  );
+  animation: timeline-pulse 2s ease-in-out infinite;
+}
+
+@keyframes timeline-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    box-shadow: 0 0 10px #00ffff;
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 20px #00ffff;
+  }
+}
+
+.timeline-item {
+  position: relative;
+  margin: 2rem 0;
+  width: calc(50% - 30px);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+  margin-left: 30px;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #00ffff;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 10px #00ffff,
+    0 0 20px rgba(0, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.timeline-item:nth-child(odd)::before {
+  right: -40px;
+}
+
+.timeline-item:nth-child(even)::before {
+  left: -40px;
+}
+
+.timeline-item:hover::before {
+  transform: scale(1.5);
+  box-shadow: 
+    0 0 20px #00ffff,
+    0 0 40px rgba(0, 255, 255, 0.5);
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(50px) scale(0.9);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: blur(10px);
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.slide-reveal {
+  opacity: 0;
+  transform: translateX(-100px) rotateY(-20deg);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.slide-reveal.visible {
+  opacity: 1;
+  transform: translateX(0) rotateY(0);
+}
+
+.hover-float {
+  transition: transform 0.3s ease;
+}
+
+.hover-float:hover {
+  transform: translateY(-10px) rotate(0deg) !important;
+}
+
+.glowing-card {
+  position: relative;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glowing-card:hover {
+  transform: translateY(-10px) scale(1.02) rotateX(5deg);
+  box-shadow: 
+    0 0 30px rgba(0, 255, 255, 0.3),
+    0 0 60px rgba(255, 0, 255, 0.2);
+}
+
+.glowing-card::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    #00ffff 90deg,
+    #ff00ff 180deg,
+    #00ffff 270deg,
+    transparent 360deg
+  );
+  animation: rotate-glow 4s linear infinite;
+  top: -25%;
+  left: -25%;
+}
+
+.glowing-card::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 18px;
+  z-index: 1;
+}
+
+.glowing-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes rotate-glow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
